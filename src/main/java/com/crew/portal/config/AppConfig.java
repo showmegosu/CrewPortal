@@ -33,8 +33,6 @@ public class AppConfig {
         // Setting JDBC properties
         props.put(DRIVER, env.getProperty("mysql.driver"));
         props.put(URL, env.getProperty("mysql.url"));
-        props.put(USER, env.getProperty("mysql.user"));
-        props.put(PASS, env.getProperty("mysql.password"));
 
         // Setting Hibernate properties
         props.put(SHOW_SQL, env.getProperty("hibernate.show_sql"));
@@ -59,7 +57,7 @@ public class AppConfig {
     @Autowired
     public HibernateTransactionManager getTransactionManager(SessionFactory sessionFactory) {
         HibernateTransactionManager transactionManager = new HibernateTransactionManager();
-        transactionManager.setSessionFactory(sessionFactory);
+        transactionManager.setSessionFactory(sessionFactory().getObject());
         return transactionManager;
     }
 }
